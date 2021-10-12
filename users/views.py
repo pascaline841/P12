@@ -14,7 +14,7 @@ class UserViewSet(ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated & IsAdmin]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self, **kwargs):
         """Get and display the list of contracts from a specific customer."""

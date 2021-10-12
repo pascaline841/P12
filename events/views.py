@@ -3,7 +3,7 @@ from .serializers import EventSerializer
 
 from contracts.models import Contract
 from customers.models import Customer
-from epicevents.permissions import IsAdmin, IsSalesContact, IsSupport
+from epicevents.permissions import IsAdmin, IsSalesContact, IsSupportContact
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
@@ -15,9 +15,7 @@ class EventViewSet(ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [
-        (IsAuthenticated & IsAdmin)
-        | (IsAuthenticated & IsSalesContact)
-        | (IsAuthenticated & IsSupport)
+        IsAuthenticated & (IsAdmin | IsSalesContact | IsSupportContact)
     ]
 
     def perform_create(self, serializer, **kwargs):
