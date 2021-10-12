@@ -3,21 +3,10 @@ from users.models import User
 
 
 class IsAdmin(BasePermission):
-    def has_permission(self, request, view):
-        admin_users = User.objects.filter(role="ADMIN")
-        return request.user in admin_users.all()
-
     def has_object_permission(self, request, view, obj):
         if request.method in ["PUT", "PATCH", "DELETE"]:
             admin_users = User.objects.filter(role="ADMIN")
             return request.user in admin_users.all()
-        return True
-
-
-class IsUser(BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in ["PUT", "PATCH"]:
-            return request.user == obj
 
 
 class IsSaler(BasePermission):

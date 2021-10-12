@@ -14,9 +14,7 @@ class ContractViewSet(ModelViewSet):
 
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
-    permission_classes = [
-        (IsAuthenticated & IsAdmin) | (IsAuthenticated & IsSalesContact)
-    ]
+    permission_classes = [IsAuthenticated & (IsAdmin | IsSalesContact)]
 
     def perform_create(self, serializer, **kwargs):
         """Create a contract from a customer."""

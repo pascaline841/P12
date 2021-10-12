@@ -1,3 +1,4 @@
+from users.models import User
 from .models import Customer
 from .serializers import CustomerSerializer
 
@@ -12,4 +13,4 @@ class CustomerViewSet(ModelViewSet):
 
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = [(IsAuthenticated & IsAdmin) | (IsAuthenticated & IsSaler)]
+    permission_classes = [IsAuthenticated & (IsAdmin | IsSaler)]
