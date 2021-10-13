@@ -4,15 +4,13 @@ from users.models import User
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        admin_users = User.objects.filter(role="ADMIN")
-        if request.user in admin_users.all():
+        if request.user == "ADMIN":
             return request.method in ["POST"]
         else:
             return request.method in SAFE_METHODS
 
     def has_object_permission(self, request, view, obj):
-        admin_users = User.objects.filter(role="ADMIN")
-        if request.user in admin_users.all():
+        if request.user == "ADMIN":
             return request.method in [
                 "GET",
                 "PUT",
@@ -27,15 +25,13 @@ class IsAdmin(BasePermission):
 
 class IsSaler(BasePermission):
     def has_permission(self, request, view):
-        sale_users = User.objects.filter(role="SALE")
-        if request.user in sale_users.all():
+        if request.user == "SALE":
             return request.method in ["POST"]
         else:
             return request.method in SAFE_METHODS
 
     def has_object_permission(self, request, view, obj):
-        sale_users = User.objects.filter(role="SALE")
-        if request.user in sale_users.all():
+        if request.user == "SALE":
             return request.method in ["GET", "PUT", "PATCH", "OPTIONS", "HEAD"]
         else:
             return request.method in SAFE_METHODS
@@ -43,8 +39,7 @@ class IsSaler(BasePermission):
 
 class IsSalesContact(BasePermission):
     def has_permission(self, request, view):
-        sale_users = User.objects.filter(role="SALE")
-        if request.user in sale_users.all():
+        if request.user == "SALE":
             return request.method in ["POST"]
         else:
             return request.method in SAFE_METHODS
