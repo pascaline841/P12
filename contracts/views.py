@@ -33,7 +33,7 @@ class ContractViewSet(ModelViewSet):
             Event.objects.create(
                 contract=contract,
                 customer=contract.customer,
-                sales_contact=customer.sales_contact,
+                sales_contact=contract.sales_contact,
             )
 
     def get_queryset(self, **kwargs):
