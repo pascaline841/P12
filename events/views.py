@@ -22,10 +22,16 @@ class EventViewSet(ModelViewSet):
         """Create an event."""
         customer = Customer.objects.get(pk=self.kwargs["customer_pk"])
         contract = Contract.objects.get(pk=self.kwargs["contract_pk"])
-        sales_contact = self.request.user
-        serializer.save(
-            customer=customer, contract=contract, sales_contact=sales_contact
-        )
+        if self.request.user.role == "SALE":
+            serializer.save(
+                customer=customer, contract=contract, sales_contact=self.request.user
+            )
+        else:
+            serializer.save(
+                customer=customer,
+                contract=contract,
+                sales_contact=customer.sales_contact,
+            )
 
     def get_queryset(self, **kwargs):
         """Get and display the list of events from a specific contract."""

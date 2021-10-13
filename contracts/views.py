@@ -21,12 +21,19 @@ class ContractViewSet(ModelViewSet):
         customer = Customer.objects.get(pk=self.kwargs["customer_pk"])
         customer.accepted = True
         customer.save()
-        contract = serializer.save(customer=customer, sales_contact=self.request.user)
+        if self.request.user.role == "SALE":
+            contract = serializer.save(
+                customer=customer, sales_contact=self.request.user
+            )
+        else:
+            contract = serializer.save(
+                customer=customer, sales_contact=customer.sales_contact
+            )
         if contract.signed == True:
             Event.objects.create(
                 contract=contract,
                 customer=contract.customer,
-                sales_contact=self.request.user,
+                sales_contact=customer.sales_contact,
             )
 
     def get_queryset(self, **kwargs):

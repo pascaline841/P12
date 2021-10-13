@@ -14,3 +14,10 @@ class CustomerViewSet(ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
     permission_classes = [IsAuthenticated & (IsAdmin | IsSaler)]
+
+    def perform_create(self, serializer, **kwargs):
+        """Create a contract from a customer."""
+        if self.request.user.role == "SALE":
+            return serializer.save(sales_contact=self.request.user)
+        else:
+            return serializer.save()
