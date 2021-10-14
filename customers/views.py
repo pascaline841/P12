@@ -19,3 +19,5 @@ class CustomerViewSet(ModelViewSet):
         """Create a contract from a customer."""
         if self.request.user.role == "SALE":
             return serializer.save(sales_contact=self.request.user)
+        else:
+            return serializer.save()

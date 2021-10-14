@@ -4,13 +4,13 @@ from users.models import User
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        if request.user == "ADMIN":
+        if request.user.role == "ADMIN":
             return request.method in ["POST"]
         else:
             return request.method in SAFE_METHODS
 
     def has_object_permission(self, request, view, obj):
-        if request.user == "ADMIN":
+        if request.user.role == "ADMIN":
             return request.method in [
                 "GET",
                 "PUT",
@@ -25,13 +25,13 @@ class IsAdmin(BasePermission):
 
 class IsSaler(BasePermission):
     def has_permission(self, request, view):
-        if request.user == "SALE":
+        if request.user.role == "SALE":
             return request.method in ["POST"]
         else:
             return request.method in SAFE_METHODS
 
     def has_object_permission(self, request, view, obj):
-        if request.user == "SALE":
+        if request.user.role == "SALE":
             return request.method in ["GET", "PUT", "PATCH", "OPTIONS", "HEAD"]
         else:
             return request.method in SAFE_METHODS
@@ -39,7 +39,7 @@ class IsSaler(BasePermission):
 
 class IsSalesContact(BasePermission):
     def has_permission(self, request, view):
-        if request.user == "SALE":
+        if request.user.role == "SALE":
             return request.method in ["POST"]
         else:
             return request.method in SAFE_METHODS
