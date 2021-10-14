@@ -76,7 +76,8 @@ Now you can apply the migrations
 ```
 python manage.py migrate
 ```
-Create an superuser account :<br>
+<br>
+Create a superuser account :<br>
 (to used a preset database is below)<br>
 You will be asked to select a username, provide an email address, and choose and confirm a password for the account.
 ```
@@ -103,10 +104,10 @@ http://127.0.0.1:8000/login
 ## Test the API with POSTMAN
 A Public Postman collection is available to test the API endpoints.
 ```
-
+https://documenter.getpostman.com/view/16100693/UV5Ukeaa
 ```
 ## USER TESTS with a PRESET DATABASE
-If you would like to test the API, there is a preset database with 1 admin and 3 users.
+If you would like to test the API, there is a preset database with 1 admin and 4 users.
 ```
 python manage.py migrate
 ```
@@ -114,5 +115,5 @@ python manage.py migrate
 python manage.py loaddata fixtures/dumb.json
 ```
 Then, run the program. <br>
-LOGIN : admin / sale/ sale2/ support<br>
+LOGIN : admin / sale/ sale2 / support / support2<br>
 PASSWORD : OCPython2021<br>
