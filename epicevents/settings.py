@@ -91,7 +91,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "epicevents",
         "USER": "admin",
-        "PASSWORD": os.getenv("PASSWORD"),
+        "PASSWORD": "OCPython2021",
         "HOST": "localhost",
         "PORT": "5432",
     }

@@ -22,6 +22,8 @@ class EventViewSet(ModelViewSet):
         """Create an event."""
         customer = Customer.objects.get(pk=self.kwargs["customer_pk"])
         contract = Contract.objects.get(pk=self.kwargs["contract_pk"])
+        contract.signed = True
+        contract.save()
         serializer.save(
             customer=customer,
             contract=contract,
