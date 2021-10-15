@@ -4,18 +4,16 @@ from users.models import User
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        try:
-            User.objects.get(username=request.user, role="ADMIN")
-        except User.DoesNotExist:
-            return False
-        return True
+        if request.user.role == "ADMIN":
+            return True
+        else:
+            return request.method in SAFE_METHODS
 
     def has_object_permission(self, request, view, obj):
-        try:
-            User.objects.get(username=request.user, role="ADMIN")
-        except User.DoesNotExist:
-            return False
-        return True
+        if request.user.role == "ADMIN":
+            return True
+        else:
+            return request.method in SAFE_METHODS
 
 
 class IsSaler(BasePermission):

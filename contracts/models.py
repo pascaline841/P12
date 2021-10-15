@@ -25,4 +25,4 @@ class Contract(models.Model):
     )
 
     def __str__(self):
-        return f"N° {self.id} - {self.customer} - SIGNED : {self.signed}"
+        return f"{self.id}"

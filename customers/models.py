@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models.fields import related
 
 
 class Customer(models.Model):
@@ -20,4 +21,4 @@ class Customer(models.Model):
     )
 
     def __str__(self):
-        return f"ID: {self.id} {self.company}, accepted: {self.accepted}"
+        return f"{self.company}"
