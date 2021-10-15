@@ -6,6 +6,7 @@ from customers.models import Customer
 from epicevents.permissions import IsAdmin, IsSalesContact, IsSupportContact
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 
@@ -33,3 +34,12 @@ class EventViewSet(ModelViewSet):
     def get_queryset(self, **kwargs):
         """Get and display the list of events from a specific contract."""
         return Event.objects.filter(contract=self.kwargs["contract_pk"])
+
+    def list(self, request, **kwargs):
+        user = self.request.user
+        queryset = Event.objects.all()
+        if user.role == "SUPPORT":
+            queryset = queryset.filter(support_contact=user)
+        queryset = self.filter_queryset(queryset).order_by("date_update")
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)
