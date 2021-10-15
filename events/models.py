@@ -43,4 +43,4 @@ class Event(models.Model):
     )
 
     def __str__(self):
-        return f"N° {self.id} - {self.customer}"
+        return f"{self.id}"
