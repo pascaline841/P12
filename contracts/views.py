@@ -37,11 +37,11 @@ class ContractViewSet(ModelViewSet):
                 sales_contact=contract.sales_contact,
             )
 
-    def get_queryset(self, **kwargs):
-        """Get and display the list of contracts from a specific customer."""
-        return Contract.objects.filter(customer=self.kwargs["customer_pk"])
-
     def list(self, request, **kwargs):
+        """
+        Get and display the list of contracts from a specific customer.
+        Support users can only access to contract where they are event.support_contact.
+        """
         user = self.request.user
         queryset = Contract.objects.filter(customer=self.kwargs["customer_pk"])
         if user.role == "SUPPORT":

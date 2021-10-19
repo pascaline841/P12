@@ -1,4 +1,3 @@
-from users.models import User
 from .models import Customer
 from .serializers import CustomerSerializer
 
@@ -25,6 +24,10 @@ class CustomerViewSet(ModelViewSet):
             return serializer.save()
 
     def list(self, request):
+        """
+        Get and display the list of contracts from a specific customer.
+        Support users can only access to customers where they are event.support_contact.
+        """
         user = self.request.user
         queryset = Customer.objects.all()
         if user.role == "SUPPORT":

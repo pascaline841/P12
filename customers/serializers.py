@@ -1,6 +1,5 @@
 from .models import Customer
-from users.models import User
-from rest_framework.serializers import ModelSerializer, ChoiceField
+from rest_framework.serializers import ModelSerializer
 
 
 class CustomerSerializer((ModelSerializer)):
