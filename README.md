@@ -115,5 +115,5 @@ python manage.py migrate
 python manage.py loaddata fixtures/dumb.json
 ```
 Then, run the program. <br>
-LOGIN : admin / sale/ sale2 / support / support2<br>
+LOGIN : admin / sale/ sale02 / support / support02<br>
 PASSWORD : OCPython2021<br>
