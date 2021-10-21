@@ -112,7 +112,7 @@ If you would like to test the API, there is a preset database with 1 admin and 4
 python manage.py migrate
 ```
 ```
-python manage.py loaddata fixtures/dumb.json
+python manage.py loaddata fixture/whole.json
 ```
 Then, run the program. <br>
 LOGIN : admin / sale / sale02 / support / support02<br>
