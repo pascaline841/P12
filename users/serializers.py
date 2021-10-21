@@ -31,6 +31,3 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def validate_password(self, password):
         if validate_password(password) is None:
             return make_password(password)
-
-    def create(self, validated_data):
-        return User.objects.create(**validated_data)

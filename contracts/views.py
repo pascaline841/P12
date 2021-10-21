@@ -5,6 +5,8 @@ from customers.models import Customer
 from epicevents.permissions import IsAdmin, IsSalesContact
 from events.models import Event
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -16,6 +18,12 @@ class ContractViewSet(ModelViewSet):
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
     permission_classes = [IsAuthenticated & (IsAdmin | IsSalesContact)]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_fields = ["sales_contact", "signed", "customer", "amount", "payment_due"]
+    search_fields = [
+        "customer",
+        "sales_contact",
+    ]
 
     def perform_create(self, serializer, **kwargs):
         """Create a contract from a customer."""
@@ -36,6 +44,10 @@ class ContractViewSet(ModelViewSet):
                 customer=contract.customer,
                 sales_contact=contract.sales_contact,
             )
+
+    def get_queryset(self, **kwargs):
+        """Get and display the list of contracts from a specific customer."""
+        return Contract.objects.filter(customer=self.kwargs["customer_pk"])
 
     def list(self, request, **kwargs):
         """

@@ -7,6 +7,8 @@ from events.models import Event
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 
 class CustomerViewSet(ModelViewSet):
@@ -15,6 +17,16 @@ class CustomerViewSet(ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
     permission_classes = [IsAuthenticated & (IsAdmin | IsSaler)]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_fields = ["sales_contact", "accepted", "customer"]
+    search_fields = [
+        "first_name",
+        "last_name",
+        "company",
+        "email",
+        "phone",
+        "sales_contact",
+    ]
 
     def perform_create(self, serializer, **kwargs):
         """Create a contract from a customer."""

@@ -5,6 +5,8 @@ from contracts.models import Contract
 from customers.models import Customer
 from epicevents.permissions import IsAdmin, IsSalesContact, IsSupportContact
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -17,6 +19,23 @@ class EventViewSet(ModelViewSet):
     serializer_class = EventSerializer
     permission_classes = [
         IsAuthenticated & (IsAdmin | IsSalesContact | IsSupportContact)
+    ]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_fields = [
+        "sales_contact",
+        "operational",
+        "customer",
+        "contract",
+        "date",
+        "support_contact",
+        "guests",
+    ]
+    search_fields = [
+        "sales_contact",
+        "customer",
+        "contract",
+        "date",
+        "support_contact",
     ]
 
     def perform_create(self, serializer, **kwargs):
