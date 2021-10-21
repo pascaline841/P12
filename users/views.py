@@ -14,7 +14,7 @@ class UserViewSet(ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filter_fields = ["role"]
     search_fields = [
@@ -23,7 +23,7 @@ class UserViewSet(ModelViewSet):
         "email",
         "username",
     ]
-    '''
+
     def get_queryset(self, **kwargs):
         """Get and display the list of contracts from a specific customer."""
         admin_users = User.objects.filter(role="ADMIN")
@@ -31,4 +31,3 @@ class UserViewSet(ModelViewSet):
             return User.objects.all()
         else:
             return User.objects.filter(username=self.request.user)
-    '''
