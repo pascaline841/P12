@@ -19,9 +19,8 @@ class ContractViewSet(ModelViewSet):
     serializer_class = ContractSerializer
     permission_classes = [IsAuthenticated & (IsAdmin | IsSalesContact)]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    filter_fields = ["sales_contact", "signed", "customer", "amount", "payment_due"]
+    filter_fields = ["sales_contact", "signed", "amount", "payement_due"]
     search_fields = [
-        "customer",
         "sales_contact",
     ]
 
@@ -46,20 +45,15 @@ class ContractViewSet(ModelViewSet):
             )
 
     def get_queryset(self, **kwargs):
-        """Get and display the list of contracts from a specific customer."""
-        return Contract.objects.filter(customer=self.kwargs["customer_pk"])
-
-    def list(self, request, **kwargs):
         """
         Get and display the list of contracts from a specific customer.
         Support users can only access to contract where they are event.support_contact.
         """
         user = self.request.user
-        queryset = Contract.objects.filter(customer=self.kwargs["customer_pk"])
-        if user.role == "SUPPORT":
-            events = Event.objects.filter(support_contact=user)
-            events_contracts = [event.contract.id for event in events]
-            queryset = Contract.objects.filter(id__in=events_contracts)
-        queryset = self.filter_queryset(queryset).order_by("date_update")
-        serializer = ContractSerializer(queryset, many=True)
-        return Response(serializer.data)
+        if user.role != "SUPPORT":
+            return Contract.objects.filter(customer=self.kwargs["customer_pk"])
+        events = Event.objects.filter(support_contact=user)
+        events_contracts = [event.contract.id for event in events]
+        return Contract.objects.filter(
+            customer=self.kwargs["customer_pk"], id__in=events_contracts
+        )
