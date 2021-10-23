@@ -77,8 +77,8 @@ Now you can apply the migrations
 python manage.py migrate
 ```
 <br>
+*****(to used a preset database see below)*****<br>
 Create a superuser account :<br>
-(to used a preset database is below)<br>
 You will be asked to select a username, provide an email address, and choose and confirm a password for the account.
 ```
 python manage.py createsuperuser
@@ -107,7 +107,7 @@ A Public Postman collection is available to test the API endpoints.
 https://documenter.getpostman.com/view/16100693/UV5Ukeaa
 ```
 ## USER TESTS with a PRESET DATABASE
-If you would like to test the API, there is a preset database with 1 admin and 4 users.
+If you would like to test the API, there is a preset database with 1 admin (superuser) and 4 users.
 ```
 python manage.py migrate
 ```
