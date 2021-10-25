@@ -76,10 +76,10 @@ Now you can apply the migrations
 ```
 python manage.py migrate
 ```
-<br>
-*****(to used a preset database see below)*****<br>
+## to used a preset database see below
 Create a superuser account :<br>
-You will be asked to select a username, provide an email address, and choose and confirm a password for the account.
+You will be asked to select a username, provide an email address, 
+and choose and confirm a password for the account.
 ```
 python manage.py createsuperuser
 ```
