@@ -165,7 +165,7 @@ LOGGING = {
     },
     "handlers": {
         "file": {
-            "level": "INFO",
+            "level": "ERROR",
             "class": "logging.FileHandler",
             "filename": "errors.log",
             "formatter": "verbose",
@@ -180,7 +180,7 @@ LOGGING = {
         "django.request": {
             "handlers": ["file"],
             "level": "ERROR",
-            "propagate": True,
+            "propagate": False,
         },
     },
 }
