@@ -57,4 +57,6 @@ class EventViewSet(ModelViewSet):
         user = self.request.user
         if user.role != "SUPPORT":
             return Event.objects.filter(contract=self.kwargs["contract_pk"])
-        return Event.filter(contract=self.kwargs["contract_pk"], support_contact=user)
+        return Event.objects.filter(
+            contract=self.kwargs["contract_pk"], support_contact=user
+        )
