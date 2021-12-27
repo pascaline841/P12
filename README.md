@@ -20,7 +20,7 @@ Django REST Framework 3 <br>
 ## INSTALLATION
 Start by closing the repository :
 ```
-git clone https://github.com/pascaline841/p12
+git clone https://github.com/pascaline841/restapi-crm
 ```
 Start access the project folder
 
