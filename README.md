@@ -1,8 +1,6 @@
 <h1 align="center">REST API Project - EPIC EVENTS - OpenClassRooms Project 12</h1>
 <br>
 <br>
-Ce script Python est le 12e projet réalisé dans le cadre d'une formation chez OpenClassrooms.
-<br>
 
 ## OVERVIEW
 Beta version of a RESTful API made with Django REST Framework. 
@@ -20,7 +18,7 @@ Django REST Framework 3 <br>
 ## INSTALLATION
 Start by closing the repository :
 ```
-git clone https://github.com/pascaline841/restapi-crm
+git clone https://github.com/pascaline841/p12
 ```
 Start access the project folder
 
