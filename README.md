@@ -1,6 +1,5 @@
-<h1 align="center">REST API Project - EPIC EVENTS - OpenClassRooms Project 12</h1>
-<br>
-<br>
+<h1 align="center">REST API Project - EPIC EVENTS </h1>
+
 
 ## OVERVIEW
 Beta version of a RESTful API made with Django REST Framework. 
@@ -18,7 +17,7 @@ Django REST Framework 3 <br>
 ## INSTALLATION
 Start by closing the repository :
 ```
-git clone https://github.com/pascaline841/p12
+git clone https://github.com/pascaline841/python_p12
 ```
 Start access the project folder
 
